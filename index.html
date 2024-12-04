@@ -83,7 +83,7 @@
         <img src="depression hacker lgo.jpg" alt="Depression Hacker Logo" class="logo">
         <h2><b>𝐏𝐫𝐨𝐛𝐥𝐞𝐦 𝐇𝐚𝐢? 
             𝐇𝐚𝐦𝐚𝐫𝐞 𝐏𝐚𝐬𝐬 𝐒𝐨𝐥𝐮𝐭𝐢𝐨𝐧 𝐇𝐚𝐢 ♡</b></h2>
-        <p><b>𝚆𝙰𝙽𝚃 𝚄𝚂 𝚃𝙾 𝙷𝙰𝙲𝙺 𝙰𝙽𝙳 𝚂𝙾𝙻𝚅𝙴 𝚈𝙾𝚄𝚁 𝙿𝚁𝙾𝙱𝙻𝙴𝙼?</b></p>
+        <p><b>𝚂𝙾 𝚆𝙰𝙽𝚃 𝚄𝚂 𝚃𝙾 𝙷𝙰𝙲𝙺 𝙰𝙽𝙳 𝚂𝙾𝙻𝚅𝙴 𝚈𝙾𝚄𝚁 𝙿𝚁𝙾𝙱𝙻𝙴𝙼?</b></p>
         
         <select id="hack-problem-choice">
             <option value="yes">Yes</option>
@@ -107,12 +107,35 @@
                 <option value="relationship">Relationship Problem</option>
             </select>
             <textarea id="problem" name="problem" placeholder="Describe your problem" required></textarea>
+            
+            <!-- New field for Call Assistance -->
+            <label for="call-assistance">Do you need call assistance?</label>
+            <input type="checkbox" id="call-assistance" name="callAssistance" onchange="togglePhoneNumberField()">
+            
+            <!-- Phone number field (initially hidden) -->
+            <input type="tel" id="phone-number" name="phoneNumber" placeholder="Enter your phone number" class="hidden">
+            
             <button type="submit">Submit</button>
         </form>
     </div>
 
     <script src="script.js"></script>
 
+    <script>
+        // Function to show/hide the phone number field when checkbox is ticked
+        function togglePhoneNumberField() {
+            var checkbox = document.getElementById('call-assistance');
+            var phoneField = document.getElementById('phone-number');
+            
+            if (checkbox.checked) {
+                phoneField.classList.remove('hidden');
+            } else {
+                phoneField.classList.add('hidden');
+            }
+        }
+    </script>
+
 </body>
 </html>
+
 
