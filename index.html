@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression Hacker</title>
+    <style>
+        body {
+            background-color: rgb(54, 54, 54); /* Teal background */
+            color: greenyellow; /* Tangerine-colored text */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .container {
+            margin-top: 50px;
+            color: tangerine; /* Tangerine text for better contrast */
+        }
+    
+        .hidden {
+            display: none;
+        }
+    
+        .logo {
+            width: 70px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+    
+        input, select, textarea {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            background-color: #fff;
+            color: teal; /* Teal-colored text */
+            border: 2px solid greenyellow; /* Border in tangerine for contrast */
+            border-radius: 5px;
+        }
+    
+        button {
+            padding: 10px 20px;
+            background-color: greenyellow;
+            color: rgba(33, 33, 27, 0.932);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+    
+        button:hover {
+            background-color: #ff7043; /* A slightly darker tangerine shade */
+        }
+    
+        #hack-problem-choice {
+            width: 150px;
+            font-size: 14px;
+            padding: 5px;
+            margin: 10px auto;
+            background-color: #31352c;
+            color: teal;
+            border: 2px solid greenyellow;
+        }
+    
+        #password-container {
+            display: block;
+            margin: 20px;
+        }
+    
+        #error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Page -->
+    <div id="login-page" class="container">
+        <img src="depression hacker lgo.jpg" alt="Depression Hacker Logo" class="logo">
+        <h2><b>𝐏𝐫𝐨𝐛𝐥𝐞𝐦 𝐇𝐚𝐢? 
+            𝐇𝐚𝐦𝐚𝐫𝐞 𝐏𝐚𝐬𝐬 𝐒𝐨𝐥𝐮𝐭𝐢𝐨𝐧 𝐇𝐚𝐢 ♡</b></h2>
+        <p><b>𝚆𝙰𝙽𝚃 𝚄𝚂 𝚃𝙾 𝙷𝙰𝙲𝙺 𝙰𝙽𝙳 𝚂𝙾𝙻𝚅𝙴 𝚈𝙾𝚄𝚁 𝙿𝚁𝙾𝙱𝙻𝙴𝙼?</b></p>
+        
+        <select id="hack-problem-choice">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        
+        <button onclick="login()">Submit</button>
+    </div>
+
+    <!-- Form Page -->
+    <div id="form-page" class="container hidden">
+        <img src="depression hacker lgo.jpg" alt="Depression Hacker Logo" class="logo">
+        <h1>Submit Your Problem</h1>
+        <form action="https://formspree.io/f/xovqrpeo" method="POST">
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <h3>Select Problem Type:</h3>
+            <select id="problem-type" name="problemType">
+                <option value="financial">Financial Problem</option>
+                <option value="career">Career Problem</option>
+                <option value="relationship">Relationship Problem</option>
+            </select>
+            <textarea id="problem" name="problem" placeholder="Describe your problem" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+

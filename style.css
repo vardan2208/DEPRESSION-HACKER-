@@ -1,0 +1,71 @@
+<style>
+    body {
+        background-color: teal; /* Teal background */
+        color: tangerine; /* Tangerine-colored text */
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        margin-top: 50px;
+        color: tangerine; /* Tangerine text for better contrast */
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .logo {
+        width: 100px;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+
+    input, select, textarea {
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+        width: 80%;
+        background-color: #fff;
+        color: teal; /* Teal-colored text */
+        border: 2px solid tangerine; /* Border in tangerine for contrast */
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: tangerine;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #ff7043; /* A slightly darker tangerine shade */
+    }
+
+    #hack-problem-choice {
+        width: 150px;
+        font-size: 14px;
+        padding: 5px;
+        margin: 10px auto;
+        background-color: #fff;
+        color: teal;
+        border: 2px solid tangerine;
+    }
+
+    #password-container {
+        display: block;
+        margin: 20px;
+    }
+
+    #error-message {
+        color: red;
+        display: none;
+    }
+</style>
