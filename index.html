@@ -38,45 +38,80 @@
             background-color: greenyellow;
             color: teal;
             border: none;
-            font-size: 14px; /* Reduced font size */
+            font-size: 14px;
             border-radius: 5px;
         }
         footer {
             margin-top: 20px;
             font-size: 14px;
         }
-        #chatbot-container {
-            position: fixed;
-            bottom: 20px;
+        .quiz-container {
+            position: absolute;
+            top: 20px;
             right: 20px;
-            width: 200px; /* Reduced width further */
-            height: 250px; /* Reduced height further */
-            background-color: white;
-            border: 2px solid teal;
-            border-radius: 10px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .quiz-container button {
+            background-color: greenyellow;
+            color: teal;
             padding: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .form-container {
+            padding-top: 60px;
+        }
+        .quiz-page {
+            text-align: center;
+        }
+        .quiz-page input {
+            width: 80%;
+            margin-top: 10px;
+        }
+
+        /* Chatbox styling */
+        #chat-box {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            width: 300px;
+            display: block;
+            transition: all 0.3s ease-in-out;
+        }
+        #chat-box.minimized {
+            width: 100px;
+            height: 40px;
+            padding: 5px;
         }
         #chat-output {
-            height: 70%; /* Reduced output area size */
+            max-height: 300px;
             overflow-y: auto;
-            padding: 5px;
-            border-bottom: 1px solid teal;
+            color: white;
         }
         #chat-input {
-            width: 85%;
-            padding: 6px;
-            border: 1px solid teal;
+            width: 100%;
+            padding: 10px;
+            border: none;
             border-radius: 5px;
-            font-size: 12px; /* Reduced font size */
         }
-        #chatbot-container h3 {
-            margin: 0;
-            padding: 5px;
-            background-color: teal;
+        #minimize-chatbox {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0, 0, 0, 0.8);
             color: white;
+            border: none;
             font-size: 14px;
-            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -87,13 +122,17 @@
         <img src="depression hacker lgo.jpg" alt="Depression Hacker Logo" class="logo">
         <h2><b>Problem Hai? Hamare Paas Solution Hai!</b></h2>
         <p><b>Want us to hack and solve your problem?</b></p>
-        <button onclick="login()">Get Started</button>
+        <button onclick="proceedToForm()">Get Started</button>
     </div>
 
     <!-- Form Page -->
     <div id="form-page" class="container hidden">
         <img src="depression hacker lgo.jpg" alt="Depression Hacker Logo" class="logo">
-        <h1>Submit Your Problem</h1>
+        <h2><b>Problem Hai? Hamare Paas Solution Hai!</b></h2>
+        <p>Welcome to Depression Hacker.</p>
+        <p>We provide support and guidance to help you navigate through life’s challenges.</p>
+        <p>You're not alone—share your concerns, and let us help you find a way forward.</p>
+
         <form action="https://formspree.io/f/xovqrpeo" method="POST">
             <input type="text" name="name" placeholder="Enter your name" required>
             <input type="email" name="email" placeholder="Enter your email" required>
@@ -109,6 +148,25 @@
                 Do you need call assistance?
             </label>
             <input type="tel" id="phone-number" name="phone" placeholder="Enter your phone number" class="hidden">
+
+            <!-- Quiz option button -->
+            <div class="quiz-container">
+                <p>Would you like to take a quiz?</p>
+                <button type="button" onclick="showQuiz()">Take the Quiz</button>
+            </div>
+
+            <!-- Quiz Results will appear here after submission -->
+            <div id="quiz-results">
+                <!-- Quiz responses will be shown here once submitted -->
+            </div>
+
+            <!-- Hidden fields to store quiz responses -->
+            <input type="hidden" name="cryDate" id="cryDate">
+            <input type="hidden" name="lastTrip" id="lastTrip">
+            <input type="hidden" name="sleepSchedule" id="sleepSchedule">
+            <input type="hidden" name="hopelessFeeling" id="hopelessFeeling">
+            <input type="hidden" name="happyFeeling" id="happyFeeling">
+
             <button type="submit">Submit</button>
         </form>
         <footer>
@@ -116,52 +174,113 @@
         </footer>
     </div>
 
-    <!-- Chatbot -->
-    <div id="chatbot-container">
-        <h3>DH-SMARTBOX</h3>
-        <div id="chat-output"></div>
-        <input type="text" id="chat-input" placeholder="Ask me anything..." onkeydown="sendSmartChat(event)">
+    <!-- Quiz Page -->
+    <div id="quiz-page" class="quiz-page hidden">
+        <h3>Take the Quiz</h3>
+        <form id="quiz-form">
+            <p>1. When was the last time you cried?</p>
+            <input type="text" id="cry-date" name="cry-date" placeholder="Enter your answer">
+            
+            <p>2. When was the last time you traveled for fun?</p>
+            <input type="text" id="last-trip" name="last-trip" placeholder="Enter your answer">
+            
+            <p>3. How is your sleep schedule?</p>
+            <input type="text" id="sleep-schedule" name="sleep-schedule" placeholder="Enter your answer">
+            
+            <p>4. How often do you feel hopeless?</p>
+            <input type="text" id="hopeless-feeling" name="hopeless-feeling" placeholder="Enter your answer">
+            
+            <p>5. When was the last time you felt truly happy?</p>
+            <input type="text" id="happy-feeling" name="happy-feeling" placeholder="Enter your answer">
+            
+            <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+        </form>
+        <button onclick="goBackToForm()">Back to Form</button>
+    </div>
+
+    <!-- Chatbox -->
+    <div id="chat-box">
+        <button id="minimize-chatbox" onclick="minimizeChatbox()">-</button>
+        <div id="chat-output" style="max-height: 300px; overflow-y: auto; color: white;"></div>
+        <input type="text" id="chat-input" placeholder="Ask me something..." style="width: 100%; padding: 10px; border: none; border-radius: 5px;">
     </div>
 
     <script>
-        function login() {
+        // Function to proceed to the form page from login page
+        function proceedToForm() {
             document.getElementById('login-page').classList.add('hidden');
             document.getElementById('form-page').classList.remove('hidden');
         }
 
+        // Function to toggle the phone number field
         function togglePhoneField() {
             const phoneField = document.getElementById('phone-number');
             phoneField.classList.toggle('hidden');
         }
 
+        // Function to show the quiz page
+        function showQuiz() {
+            document.getElementById('form-page').classList.add('hidden');
+            document.getElementById('quiz-page').classList.remove('hidden');
+        }
+
+        // Function to submit quiz responses
+        function submitQuiz() {
+            const cryDate = document.getElementById('cry-date').value;
+            const lastTrip = document.getElementById('last-trip').value;
+            const sleepSchedule = document.getElementById('sleep-schedule').value;
+            const hopelessFeeling = document.getElementById('hopeless-feeling').value;
+            const happyFeeling = document.getElementById('happy-feeling').value;
+
+            document.getElementById('cryDate').value = cryDate;
+            document.getElementById('lastTrip').value = lastTrip;
+            document.getElementById('sleepSchedule').value = sleepSchedule;
+            document.getElementById('hopelessFeeling').value = hopelessFeeling;
+            document.getElementById('happyFeeling').value = happyFeeling;
+
+            // Go back to the form page after quiz submission
+            goBackToForm();
+        }
+
+        // Function to go back to the form page
+        function goBackToForm() {
+            document.getElementById('quiz-page').classList.add('hidden');
+            document.getElementById('form-page').classList.remove('hidden');
+        }
+
+        // Chatbot logic
         const smartResponses = [
-            "I understand that you're going through something tough. Remember, every problem has a solution, and it's okay to ask for help. For exact and better assistance, please submit your problem.",
-            "It sounds like you're facing a challenging time, but you're not alone in this. There are always ways to move forward. For exact and better assistance, please submit your problem.",
-            "Every obstacle is a stepping stone to success. Don't worry, help is on the way! For exact and better assistance, please submit your problem.",
-            "I can sense your frustration, but every challenge can be overcome with the right mindset. For exact and better assistance, please submit your problem.",
-            "You're stronger than you think. Keep pushing forward, and don't hesitate to ask for the help you need. For exact and better assistance, please submit your problem.",
-            "It's okay to feel lost sometimes. Remember, every storm eventually clears up. For exact and better assistance, please submit your problem.",
-            "You're doing great by reaching out. No problem is too big to solve, and we're here to help. For exact and better assistance, please submit your problem.",
-            "It seems like you're at a crossroads, but remember, every difficult situation brings an opportunity. For exact and better assistance, please submit your problem.",
-            "Challenges make us grow, and you're already taking the right step by seeking advice. For exact and better assistance, please submit your problem.",
-            "I can feel that you're trying your best, and that's already a huge step forward. For exact and better assistance, please submit your problem."
+            "It sounds like you're going through something difficult, and that's okay. Everyone needs help sometimes. For exact and better assistance, please submit your problem.",
+            "I can imagine that situation must feel overwhelming. Remember, you're not alone. For exact and better assistance, please submit your problem.",
+            "That sounds tough, but there are always solutions. Let's work together on this. For exact and better assistance, please submit your problem.",
+            "I understand you're facing a challenge. Sometimes talking about it can help. For exact and better assistance, please submit your problem.",
+            "It's okay to feel unsure sometimes. But with the right support, things can improve. For exact and better assistance, please submit your problem."
         ];
 
         function sendSmartChat(event) {
             if (event.key === 'Enter') {
                 const input = document.getElementById('chat-input').value.trim();
                 const chatOutput = document.getElementById('chat-output');
-                chatOutput.innerHTML += `<p><b>You:</b> ${input}</p>`;
-                setTimeout(() => {
+                
+                if (input) {
+                    chatOutput.innerHTML += `<p><b>You:</b> ${input}</p>`;
                     const response = smartResponses[Math.floor(Math.random() * smartResponses.length)];
-                    chatOutput.innerHTML += `<p><b>Bot:</b> ${response}</p>`;
-                    chatOutput.scrollTop = chatOutput.scrollHeight;
-                }, 1000);
+                    setTimeout(() => {
+                        chatOutput.innerHTML += `<p><b>DP-CHATHUB:</b> ${response}</p>`;
+                        chatOutput.scrollTop = chatOutput.scrollHeight;
+                    }, 1000);
+                }
                 document.getElementById('chat-input').value = '';
             }
         }
-    </script>
 
+        function minimizeChatbox() {
+            const chatBox = document.getElementById('chat-box');
+            chatBox.classList.toggle('minimized');
+        }
+
+        document.getElementById('chat-input').addEventListener('keydown', sendSmartChat);
+    </script>
 </body>
 </html>
 
