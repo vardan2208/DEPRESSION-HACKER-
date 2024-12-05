@@ -6,73 +6,77 @@
     <title>Depression Hacker</title>
     <style>
         body {
-            background-color: rgb(54, 54, 54); /* Teal background */
-            color: greenyellow; /* Tangerine-colored text */
+            background-color: rgb(43, 50, 50);
+            color: greenyellow;
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
         }
-    
         .container {
             margin-top: 50px;
-            color: tangerine; /* Tangerine text for better contrast */
         }
-    
         .hidden {
             display: none;
         }
-    
         .logo {
             width: 70px;
             position: absolute;
             top: 20px;
             left: 20px;
         }
-    
         input, select, textarea {
             display: block;
             margin: 10px auto;
-            padding: 10px;
-            width: 80%;
-            background-color: #fff;
-            color: teal; /* Teal-colored text */
-            border: 2px solid greenyellow; /* Border in tangerine for contrast */
+            padding: 8px;
+            width: 70%;
+            border: 2px solid rgb(87, 93, 78);
             border-radius: 5px;
         }
-    
         button {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background-color: greenyellow;
-            color: rgba(33, 33, 27, 0.932);
+            color: teal;
             border: none;
-            cursor: pointer;
-            font-size: 16px;
+            font-size: 14px; /* Reduced font size */
             border-radius: 5px;
         }
-    
-        button:hover {
-            background-color: #ff7043; /* A slightly darker tangerine shade */
-        }
-    
-        #hack-problem-choice {
-            width: 150px;
+        footer {
+            margin-top: 20px;
             font-size: 14px;
+        }
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px; /* Reduced width further */
+            height: 250px; /* Reduced height further */
+            background-color: white;
+            border: 2px solid teal;
+            border-radius: 10px;
+            padding: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        #chat-output {
+            height: 70%; /* Reduced output area size */
+            overflow-y: auto;
             padding: 5px;
-            margin: 10px auto;
-            background-color: #31352c;
-            color: teal;
-            border: 2px solid greenyellow;
+            border-bottom: 1px solid teal;
         }
-    
-        #password-container {
-            display: block;
-            margin: 20px;
+        #chat-input {
+            width: 85%;
+            padding: 6px;
+            border: 1px solid teal;
+            border-radius: 5px;
+            font-size: 12px; /* Reduced font size */
         }
-    
-        #error-message {
-            color: red;
-            display: none;
+        #chatbot-container h3 {
+            margin: 0;
+            padding: 5px;
+            background-color: teal;
+            color: white;
+            font-size: 14px;
+            text-align: center;
         }
     </style>
 </head>
@@ -81,15 +85,12 @@
     <!-- Login Page -->
     <div id="login-page" class="container">
         <img src="depression hacker lgo.jpg" alt="Depression Hacker Logo" class="logo">
-        <h2><b>𝐏𝐫𝐨𝐛𝐥𝐞𝐦 𝐇𝐚𝐢? 
-            𝐇𝐚𝐦𝐚𝐫𝐞 𝐏𝐚𝐬𝐬 𝐒𝐨𝐥𝐮𝐭𝐢𝐨𝐧 𝐇𝐚𝐢 ♡</b></h2>
-        <p><b>𝚂𝙾 𝚆𝙰𝙽𝚃 𝚄𝚂 𝚃𝙾 𝙷𝙰𝙲𝙺 𝙰𝙽𝙳 𝚂𝙾𝙻𝚅𝙴 𝚈𝙾𝚄𝚁 𝙿𝚁𝙾𝙱𝙻𝙴𝙼?</b></p>
-        
+        <h2><b>Problem Hai? Hamare Paas Solution Hai!</b></h2>
+        <p><b>Want us to hack and solve your problem?</b></p>
         <select id="hack-problem-choice">
             <option value="yes">Yes</option>
             <option value="no">No</option>
         </select>
-        
         <button onclick="login()">Submit</button>
     </div>
 
@@ -98,44 +99,81 @@
         <img src="depression hacker lgo.jpg" alt="Depression Hacker Logo" class="logo">
         <h1>Submit Your Problem</h1>
         <form action="https://formspree.io/f/xovqrpeo" method="POST">
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <input type="email" name="email" placeholder="Enter your email" required>
             <h3>Select Problem Type:</h3>
-            <select id="problem-type" name="problemType">
+            <select name="problemType">
                 <option value="financial">Financial Problem</option>
                 <option value="career">Career Problem</option>
                 <option value="relationship">Relationship Problem</option>
             </select>
-            <textarea id="problem" name="problem" placeholder="Describe your problem" required></textarea>
-            
-            <!-- New field for Call Assistance -->
-            <label for="call-assistance">Do you need call assistance?</label>
-            <input type="checkbox" id="call-assistance" name="callAssistance" onchange="togglePhoneNumberField()">
-            
-            <!-- Phone number field (initially hidden) -->
-            <input type="tel" id="phone-number" name="phoneNumber" placeholder="Enter your phone number" class="hidden">
-            
+            <textarea name="problem" placeholder="Describe your problem" required></textarea>
+            <label>
+                <input type="checkbox" name="callAssistance" id="call-assistance" onclick="togglePhoneField()">
+                Do you need call assistance?
+            </label>
+            <input type="tel" id="phone-number" name="phone" placeholder="Enter your phone number" class="hidden">
             <button type="submit">Submit</button>
         </form>
+        <footer>
+            <p>Contact us: 9410606636 | Email: <a href="mailto:vardan.yadav.cse.2022@miet.ac.in">vardan.yadav.cse.2022@miet.ac.in</a></p>
+        </footer>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Chatbot -->
+    <div id="chatbot-container">
+        <h3>DH-SMARTBOX</h3>
+        <div id="chat-output"></div>
+        <input type="text" id="chat-input" placeholder="Ask me anything..." onkeydown="sendSmartChat(event)">
+    </div>
 
     <script>
-        // Function to show/hide the phone number field when checkbox is ticked
-        function togglePhoneNumberField() {
-            var checkbox = document.getElementById('call-assistance');
-            var phoneField = document.getElementById('phone-number');
-            
-            if (checkbox.checked) {
+        function login() {
+            const choice = document.getElementById('hack-problem-choice').value;
+            if (choice === 'yes') {
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('form-page').classList.remove('hidden');
+            } else {
+                alert('Come back if you need help!');
+            }
+        }
+
+        function togglePhoneField() {
+            const phoneField = document.getElementById('phone-number');
+            if (document.getElementById('call-assistance').checked) {
                 phoneField.classList.remove('hidden');
             } else {
                 phoneField.classList.add('hidden');
+            }
+        }
+
+        const smartResponses = [
+            "I understand that you're going through something tough. Remember, every problem has a solution, and it's okay to ask for help. For exact and better assistance, please submit your problem.",
+    "It sounds like you're facing a challenging time, but you're not alone in this. There are always ways to move forward. For exact and better assistance, please submit your problem.",
+    "Every obstacle is a stepping stone to success. Don't worry, help is on the way! For exact and better assistance, please submit your problem.",
+    "I can sense your frustration, but every challenge can be overcome with the right mindset. For exact and better assistance, please submit your problem.",
+    "You're stronger than you think. Keep pushing forward, and don't hesitate to ask for the help you need. For exact and better assistance, please submit your problem.",
+    "It's okay to feel lost sometimes. Remember, every storm eventually clears up. For exact and better assistance, please submit your problem.",
+    "You're doing great by reaching out. No problem is too big to solve, and we're here to help. For exact and better assistance, please submit your problem.",
+    "It seems like you're at a crossroads, but remember, every difficult situation brings an opportunity. For exact and better assistance, please submit your problem.",
+    "Challenges make us grow, and you're already taking the right step by seeking advice. For exact and better assistance, please submit your problem.",
+    "I can feel that you're trying your best, and that's already a huge step forward. For exact and better assistance, please submit your problem."
+        ];
+
+        function sendSmartChat(event) {
+            if (event.key === 'Enter') {
+                const input = document.getElementById('chat-input').value.trim();
+                const chatOutput = document.getElementById('chat-output');
+                chatOutput.innerHTML += `<p><b>You:</b> ${input}</p>`;
+                setTimeout(() => {
+                    const response = smartResponses[Math.floor(Math.random() * smartResponses.length)];
+                    chatOutput.innerHTML += `<p><b>Bot:</b> ${response}</p>`;
+                    chatOutput.scrollTop = chatOutput.scrollHeight;
+                }, 1000);
+                document.getElementById('chat-input').value = '';
             }
         }
     </script>
 
 </body>
 </html>
-
-
