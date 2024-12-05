@@ -1,71 +1,74 @@
-<style>
-    body {
-        background-color: teal; /* Teal background */
-        color: tangerine; /* Tangerine-colored text */
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
+body {
+    background-color: teal;
+    color: greenyellow;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
-    .container {
-        margin-top: 50px;
-        color: tangerine; /* Tangerine text for better contrast */
-    }
+.container {
+    margin-top: 50px;
+}
 
-    .hidden {
-        display: none;
-    }
+.hidden {
+    display: none;
+}
 
-    .logo {
-        width: 100px;
-        position: absolute;
-        top: 20px;
-        left: 20px;
-    }
+.logo {
+    width: 70px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
 
-    input, select, textarea {
-        display: block;
-        margin: 10px auto;
-        padding: 10px;
-        width: 80%;
-        background-color: #fff;
-        color: teal; /* Teal-colored text */
-        border: 2px solid tangerine; /* Border in tangerine for contrast */
-        border-radius: 5px;
-    }
+input, select, textarea {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    border: 2px solid greenyellow;
+    border-radius: 5px;
+}
 
-    button {
-        padding: 10px 20px;
-        background-color: tangerine;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 5px;
-    }
+button {
+    padding: 10px 20px;
+    background-color: greenyellow;
+    color: teal;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
 
-    button:hover {
-        background-color: #ff7043; /* A slightly darker tangerine shade */
-    }
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+}
 
-    #hack-problem-choice {
-        width: 150px;
-        font-size: 14px;
-        padding: 5px;
-        margin: 10px auto;
-        background-color: #fff;
-        color: teal;
-        border: 2px solid tangerine;
-    }
+#chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 250px; /* Reduced width */
+    height: 350px; /* Reduced height */
+    background-color: white;
+    border: 2px solid teal;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
-    #password-container {
-        display: block;
-        margin: 20px;
-    }
+#chat-output {
+    height: 70%; /* Reduced output area size */
+    overflow-y: auto;
+    padding: 5px;
+    border-bottom: 1px solid teal;
+}
 
-    #error-message {
-        color: red;
-        display: none;
-    }
-</style>
+#chat-input {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid teal;
+    border-radius: 5px;
+    font-size: 14px; /* Reduced font size */
+}
