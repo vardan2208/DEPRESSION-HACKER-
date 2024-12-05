@@ -1,66 +1,48 @@
-let submissions = [];
-
-function login() {
-    const hackProblemChoice = document.getElementById('hack-problem-choice').value;
-    if (hackProblemChoice === 'yes') {
+function proceedToForm() {
+    const choice = document.getElementById('hack-problem-choice').value;
+    if (choice === 'yes') {
         document.getElementById('login-page').classList.add('hidden');
         document.getElementById('form-page').classList.remove('hidden');
     } else {
-        alert("Come back if you need help!");
+        alert('We are here whenever you need us!');
     }
 }
 
-function submitForm(event) {
-    event.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const problemType = document.getElementById('problem-type').value;
-    const problem = document.getElementById('problem').value;
-
-    const submission = { name, email, problemType, problem };
-
-    // Save the submission in the local storage or send it to your server
-    submissions.push(submission);
-    alert("Your problem has been submitted!");
-    
-    // Reset form
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('problem-type').value = 'financial';
-    document.getElementById('problem').value = '';
+function togglePhoneField() {
+    const phoneField = document.getElementById('phone-number');
+    phoneField.classList.toggle('hidden');
 }
 
-function displayPasswordPrompt() {
-    document.getElementById('password-container').classList.remove('hidden');
+function logMood() {
+    const mood = document.getElementById('mood-select').value;
+    const moodHistory = document.getElementById('mood-history');
+    const newEntry = document.createElement('div');
+    newEntry.textContent = `Mood logged: ${mood}`;
+    moodHistory.appendChild(newEntry);
 }
 
-function checkPassword() {
-    const enteredPassword = document.getElementById('password').value;
-    
-    if (enteredPassword === '12345') {
-        document.getElementById('password-container').classList.add('hidden');
-        displaySubmissions();
-    } else {
-        document.getElementById('error-message').style.display = 'block';
+// Chatbot logic
+const smartResponses = [
+    "It sounds like you're going through something difficult, and that's okay. Everyone needs help sometimes. For exact and better assistance, please submit your problem.",
+    "I can imagine that situation must feel overwhelming. Remember, you're not alone. For exact and better assistance, please submit your problem.",
+    "That sounds tough, but there are always solutions. Let's work together on this. For exact and better assistance, please submit your problem.",
+    "I understand you're facing a challenge. Sometimes talking about it can help. For exact and better assistance, please submit your problem.",
+    "It's okay to feel unsure sometimes. But with the right support, things can improve. For exact and better assistance, please submit your problem."
+];
+
+function sendSmartChat(event) {
+    if (event.key === 'Enter') {
+        const input = document.getElementById('chat-input').value.trim();
+        const chatOutput = document.getElementById('chat-output');
+        chatOutput.innerHTML += `<p><b>You:</b> ${input}</p>`;
+        
+        setTimeout(() => {
+            const response = smartResponses[Math.floor(Math.random() * smartResponses.length)];
+            chatOutput.innerHTML += `<p><b>DP-CHATHUB:</b> ${response}</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }, 1000);
+
+        document.getElementById('chat-input').value = '';
     }
 }
 
-function displaySubmissions() {
-    const responseContainer = document.getElementById('response-container');
-    responseContainer.innerHTML = '<h2>Submitted Problems:</h2>';
-    
-    if (submissions.length === 0) {
-        responseContainer.innerHTML += '<p>No submissions yet.</p>';
-    } else {
-        submissions.forEach(submission => {
-            responseContainer.innerHTML += `
-                <p><b>Name:</b> ${submission.name}</p>
-                <p><b>Email:</b> ${submission.email}</p>
-                <p><b>Problem Type:</b> ${submission.problemType}</p>
-                <p><b>Problem:</b> ${submission.problem}</p>
-                <hr>
-            `;
-        });
-    }
-}
