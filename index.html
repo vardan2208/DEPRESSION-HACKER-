@@ -87,11 +87,7 @@
         <img src="depression hacker lgo.jpg" alt="Depression Hacker Logo" class="logo">
         <h2><b>Problem Hai? Hamare Paas Solution Hai!</b></h2>
         <p><b>Want us to hack and solve your problem?</b></p>
-        <select id="hack-problem-choice">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-        <button onclick="login()">Submit</button>
+        <button onclick="login()">Get Started</button>
     </div>
 
     <!-- Form Page -->
@@ -129,35 +125,26 @@
 
     <script>
         function login() {
-            const choice = document.getElementById('hack-problem-choice').value;
-            if (choice === 'yes') {
-                document.getElementById('login-page').classList.add('hidden');
-                document.getElementById('form-page').classList.remove('hidden');
-            } else {
-                alert('Come back if you need help!');
-            }
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('form-page').classList.remove('hidden');
         }
 
         function togglePhoneField() {
             const phoneField = document.getElementById('phone-number');
-            if (document.getElementById('call-assistance').checked) {
-                phoneField.classList.remove('hidden');
-            } else {
-                phoneField.classList.add('hidden');
-            }
+            phoneField.classList.toggle('hidden');
         }
 
         const smartResponses = [
             "I understand that you're going through something tough. Remember, every problem has a solution, and it's okay to ask for help. For exact and better assistance, please submit your problem.",
-    "It sounds like you're facing a challenging time, but you're not alone in this. There are always ways to move forward. For exact and better assistance, please submit your problem.",
-    "Every obstacle is a stepping stone to success. Don't worry, help is on the way! For exact and better assistance, please submit your problem.",
-    "I can sense your frustration, but every challenge can be overcome with the right mindset. For exact and better assistance, please submit your problem.",
-    "You're stronger than you think. Keep pushing forward, and don't hesitate to ask for the help you need. For exact and better assistance, please submit your problem.",
-    "It's okay to feel lost sometimes. Remember, every storm eventually clears up. For exact and better assistance, please submit your problem.",
-    "You're doing great by reaching out. No problem is too big to solve, and we're here to help. For exact and better assistance, please submit your problem.",
-    "It seems like you're at a crossroads, but remember, every difficult situation brings an opportunity. For exact and better assistance, please submit your problem.",
-    "Challenges make us grow, and you're already taking the right step by seeking advice. For exact and better assistance, please submit your problem.",
-    "I can feel that you're trying your best, and that's already a huge step forward. For exact and better assistance, please submit your problem."
+            "It sounds like you're facing a challenging time, but you're not alone in this. There are always ways to move forward. For exact and better assistance, please submit your problem.",
+            "Every obstacle is a stepping stone to success. Don't worry, help is on the way! For exact and better assistance, please submit your problem.",
+            "I can sense your frustration, but every challenge can be overcome with the right mindset. For exact and better assistance, please submit your problem.",
+            "You're stronger than you think. Keep pushing forward, and don't hesitate to ask for the help you need. For exact and better assistance, please submit your problem.",
+            "It's okay to feel lost sometimes. Remember, every storm eventually clears up. For exact and better assistance, please submit your problem.",
+            "You're doing great by reaching out. No problem is too big to solve, and we're here to help. For exact and better assistance, please submit your problem.",
+            "It seems like you're at a crossroads, but remember, every difficult situation brings an opportunity. For exact and better assistance, please submit your problem.",
+            "Challenges make us grow, and you're already taking the right step by seeking advice. For exact and better assistance, please submit your problem.",
+            "I can feel that you're trying your best, and that's already a huge step forward. For exact and better assistance, please submit your problem."
         ];
 
         function sendSmartChat(event) {
@@ -177,3 +164,4 @@
 
 </body>
 </html>
+
