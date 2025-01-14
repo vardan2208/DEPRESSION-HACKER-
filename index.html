@@ -76,7 +76,7 @@
             margin-top: 10px;
         }
 
-        /* Chatbox styling */
+        /* Chatbox styling for Botpress */
         #chat-box {
             position: fixed;
             bottom: 10px;
@@ -92,29 +92,6 @@
             width: 100px;
             height: 40px;
             padding: 5px;
-        }
-        #chat-output {
-            max-height: 300px;
-            overflow-y: auto;
-            color: white;
-        }
-        #chat-input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        #minimize-chatbox {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
         }
     </style>
 </head>
@@ -201,12 +178,26 @@
         <button onclick="goBackToForm()">Back to Form</button>
     </div>
 
-    <!-- Chatbox -->
-    <div id="chat-box">
-        <button id="minimize-chatbox" onclick="minimizeChatbox()">-</button>
-        <div id="chat-output" style="max-height: 300px; overflow-y: auto; color: white;"></div>
-        <input type="text" id="chat-input" placeholder="Ask me something..." style="width: 100%; padding: 10px; border: none; border-radius: 5px;">
-    </div>
+    <!-- Botpress Script Integration -->
+    <script>
+        window.addEventListener('load', function () {
+            // Clear sessionStorage to ensure the chat history doesn't persist
+            sessionStorage.clear();
+
+            // Initialize Botpress Webchat with resetSession option
+            if (window.BotpressWebChat) {
+                window.BotpressWebChat.init({
+                    botId: 'YOUR_BOTPRESS_BOT_ID',  // Replace with your Botpress bot ID
+                    resetSession: true,  // Reset the session to ensure no chat history
+                    onMounted: function () {
+                        console.log('Botpress Webchat initialized!');
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/01/14/18/20250114185019-V565E8QS.js"></script>
 
     <script>
         // Function to proceed to the form page from login page
@@ -250,40 +241,6 @@
             document.getElementById('quiz-page').classList.add('hidden');
             document.getElementById('form-page').classList.remove('hidden');
         }
-
-        // Chatbot logic
-        const smartResponses = [
-            "It sounds like you're going through something difficult, and that's okay. Everyone needs help sometimes. For exact and better assistance, please submit your problem.",
-            "I can imagine that situation must feel overwhelming. Remember, you're not alone. For exact and better assistance, please submit your problem.",
-            "That sounds tough, but there are always solutions. Let's work together on this. For exact and better assistance, please submit your problem.",
-            "I understand you're facing a challenge. Sometimes talking about it can help. For exact and better assistance, please submit your problem.",
-            "It's okay to feel unsure sometimes. But with the right support, things can improve. For exact and better assistance, please submit your problem."
-        ];
-
-        function sendSmartChat(event) {
-            if (event.key === 'Enter') {
-                const input = document.getElementById('chat-input').value.trim();
-                const chatOutput = document.getElementById('chat-output');
-                
-                if (input) {
-                    chatOutput.innerHTML += `<p><b>You:</b> ${input}</p>`;
-                    const response = smartResponses[Math.floor(Math.random() * smartResponses.length)];
-                    setTimeout(() => {
-                        chatOutput.innerHTML += `<p><b>DP-CHATHUB:</b> ${response}</p>`;
-                        chatOutput.scrollTop = chatOutput.scrollHeight;
-                    }, 1000);
-                }
-                document.getElementById('chat-input').value = '';
-            }
-        }
-
-        function minimizeChatbox() {
-            const chatBox = document.getElementById('chat-box');
-            chatBox.classList.toggle('minimized');
-        }
-
-        document.getElementById('chat-input').addEventListener('keydown', sendSmartChat);
     </script>
 </body>
 </html>
-
